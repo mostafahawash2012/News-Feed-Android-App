@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">News Feed</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_action_setting">Settings</string>
+    <string name="key_location">keyLocation</string>
+    <string name="title_setting_locatio">Set Your Location</string>
+    <string name="defaultValue_setting_location">US</string>
+    <string name="title_toolbar_settings">Settings</string>
+    <string name="content_authority">com.example.mostafa.newsfeed.content.NewsContentProvider</string>
+    <string name="sync_account_type">newsfeed.mostafa.example.com</string>
+    <string name="addToFavorite">Add to favourites</string>
+</resources>
