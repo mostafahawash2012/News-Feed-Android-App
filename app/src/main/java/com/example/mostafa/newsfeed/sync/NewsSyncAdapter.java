@@ -7,6 +7,7 @@ import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SyncResult;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import java.util.Vector;
 public class NewsSyncAdapter extends AbstractThreadedSyncAdapter {
 
     private String LOG_TAG = NewsSyncAdapter.class.getSimpleName();
+    public static final String ACTION_DATA_UPDATED = "com.example.mostafa.newsfeed.ACTION_DATA_UPDATED";
     Context mContext;
     public static final int SYNC_INTERVAL = 60 * 60 * 24;//24 hours
 
@@ -141,6 +143,10 @@ public class NewsSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
             }
         }
+
+        Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
+        mContext.sendBroadcast(dataUpdatedIntent);// notify components waiting for updates in our app with the db update
+
 
     }
     private void fetchJsonAndSave(String jsonStr,int type_key){

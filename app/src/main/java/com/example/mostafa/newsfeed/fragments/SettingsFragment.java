@@ -60,7 +60,7 @@ GoogleApiClient.OnConnectionFailedListener,LocationListener{
     public static final int REQUEST_CHECK_SETTINGS = 0x1;
 
     Preference mLocation;
-    String mLovationValue;
+//    String mLovationValue;
     Context mContext;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,10 +75,6 @@ GoogleApiClient.OnConnectionFailedListener,LocationListener{
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
-
-//        mLovationValue = PreferenceManager.getDefaultSharedPreferences(getActivity())
-//                .getString(getString(R.string.key_location),"nooo value");
-//        findPreference(getString(R.string.key_location)).setSummary(mLovationValue);
 
         mLocation= findPreference(getString(R.string.key_location));
         mLocation.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -103,7 +99,7 @@ GoogleApiClient.OnConnectionFailedListener,LocationListener{
         String key = preference.getKey();
         String value= PreferenceManager
                 .getDefaultSharedPreferences(preference.getContext())
-                .getString(key,"");
+                .getString(key,getString(R.string.defaultValue_setting_location));
         if(key.equals(getString(R.string.key_location))){
             preference.setSummary(value);
         }
@@ -112,14 +108,15 @@ GoogleApiClient.OnConnectionFailedListener,LocationListener{
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if(key.equals(getString(R.string.key_location))){
+            Log.e(LOG_TAG, " syncImmediately from onSharedPreferenceChanged ");
+            bindPreferenceSummaryToValue(mLocation);// update the location preference summary with the new value added
             NewsSyncAdapter.syncImmediately(getActivity());
-            Log.e(LOG_TAG, " syncImmediately from onshredchaged ");
         }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Log.e("onPreferencechanged", " onPreferenceChanged is called ");
+        Log.e(LOG_TAG, " onPreferenceChanged is called ");
         String stringValue = newValue.toString();
         if(preference.getKey().equals(getString(R.string.key_location))){
             preference.setSummary(stringValue);
@@ -266,7 +263,7 @@ GoogleApiClient.OnConnectionFailedListener,LocationListener{
                     case Activity.RESULT_CANCELED:
                         Log.e(LOG_TAG,"Activity Result is canceled ..call settingRequest to fire a dialog again!");
 
-                        settingsRequest();
+                        //settingsRequest();
                         break;
                 }
                 break;

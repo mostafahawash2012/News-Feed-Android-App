@@ -41,6 +41,13 @@ public class NewsContract {
             return ContentUris.withAppendedId(CONTENT_URI,id);
         }
 
+        public static final String[] WIDGET_COLUMNS = {
+                _ID,
+                COLUMN_DATE,
+                COLUMN_TITLE
+        };
+
+
     }
     public static final String SQL_CREATE_NEWS_TABLE = "CREATE TABLE IF NOT EXISTS "+
             NewsEntry.TABLE_NAME+"("+
@@ -54,7 +61,9 @@ public class NewsContract {
             NewsEntry.COLUMN_TEXT+" TEXT NOT NULL,"+
             NewsEntry.COLUMN_GLOBAL+" INTEGER DEFAULT 0,"+
             NewsEntry.COLUMN_LOCAL+" INTEGER DEFAULT 0,"+
-            NewsEntry.COLUMN_FAV+" INTEGER DEFAULT 0,"+
-            " UNIQUE ("+NewsEntry.COLUMN_NEWS_ID+") ON CONFLICT REPLACE);";
+            NewsEntry.COLUMN_FAV+" INTEGER DEFAULT 0"+
+            ");";
+        //    " UNIQUE ("+NewsEntry.COLUMN_NEWS_ID+") ON CONFLICT REPLAC);";
+
 
 }

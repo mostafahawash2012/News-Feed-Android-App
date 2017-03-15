@@ -164,6 +164,22 @@ public class NewsContentProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        return 0;
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        int rows_affected;
+        switch (URI_MATCHER.match(uri)){
+            case NEWS_WITH_ID:{
+                rows_affected = db.update(NewsContract.NewsEntry.TABLE_NAME
+                ,values
+                , NewsContract.NewsEntry._ID +" = ?"
+                ,new String[]{uri.getLastPathSegment()});
+                break;
+            }
+            default: {
+                throw new UnsupportedOperationException("Unknown Uri " + uri);
+            }
+        }
+        mContext.getContentResolver().notifyChange(uri, null);
+        return rows_affected;
+
     }
 }

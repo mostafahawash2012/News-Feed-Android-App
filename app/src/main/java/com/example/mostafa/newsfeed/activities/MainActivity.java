@@ -2,6 +2,7 @@ package com.example.mostafa.newsfeed.activities;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -14,8 +15,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.mostafa.newsfeed.R;
+import com.example.mostafa.newsfeed.adapters.RecyclerCursorAdapter;
 import com.example.mostafa.newsfeed.adapters.ViewPagerAdapter;
 import com.example.mostafa.newsfeed.content.NewsContract;
+import com.example.mostafa.newsfeed.fragments.DetailFragment;
 import com.example.mostafa.newsfeed.fragments.FavFragment;
 import com.example.mostafa.newsfeed.fragments.GlobalFragment;
 import com.example.mostafa.newsfeed.fragments.LocalFragment;
@@ -24,9 +27,11 @@ import com.example.mostafa.newsfeed.sync.NewsSyncAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerCursorAdapter.CallBack {
 
     private String LOG_TAG = MainActivity.class.getSimpleName();
+    private boolean tablet = false;
+    private static Uri uri;
     private Toolbar mToolbar;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
@@ -61,8 +66,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.e(LOG_TAG,"OnCreate");
         setContentView(R.layout.activity_main);
+        if(findViewById(R.id.detailFragment_container)!=null){
+            tablet=true;
+            Log.e(LOG_TAG,"This is tablet");
+        }
         mToolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);//Set a Toolbar to act as the ActionBar for this Activity window.
+        setSupportActionBar(mToolbar);
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mViewPager = (ViewPager)findViewById(R.id.viewpager);
         setupViewPager(mViewPager);
@@ -104,5 +114,29 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout.getTabAt(0).setIcon(mTabIcons[0]);
         mTabLayout.getTabAt(1).setIcon(mTabIcons[1]);
         mTabLayout.getTabAt(2).setIcon(mTabIcons[2]);
+    }
+
+    @Override
+    public void onItemSelected(Uri selectedUri) {
+        if(tablet){
+            Log.e(LOG_TAG,"This is tablet");
+            //make sure that the comming uri is new and different from
+            //the previous one
+            if (uri == null || (!uri.getLastPathSegment().
+                    equals(selectedUri.getLastPathSegment()))) {
+                uri = selectedUri;
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("URI", selectedUri);
+                DetailFragment detailFragment = new DetailFragment();
+                detailFragment.setArguments(bundle);
+
+                getSupportFragmentManager().beginTransaction().//replace the container with the detailFregment
+                        replace(R.id.detailsFragmentContainer, detailFragment).commit();
+            }
+        }else{
+            Log.e(LOG_TAG,"This is phone");
+            startActivity(new Intent(MainActivity.this, DetailActivity.class).
+                    setData(selectedUri));
+        }
     }
 }

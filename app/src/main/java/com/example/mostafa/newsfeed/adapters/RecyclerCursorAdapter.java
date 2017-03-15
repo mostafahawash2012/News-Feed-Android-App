@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -124,12 +125,16 @@ public class RecyclerCursorAdapter extends RecyclerView.Adapter<RecyclerCursorAd
                     Intent intent = new Intent(mContext, DetailActivity.class);
                     //Bundle bundle = new Bundle();
                    // bundle.putParcelable("URI",selectedUri);
-                    intent.setData(selectedUri);
-                    mContext.startActivity(intent);
+//                    intent.setData(selectedUri);
+//                    mContext.startActivity(intent);
+                    ((CallBack)mContext).onItemSelected(selectedUri);
 
                 }
             });
         }
 
+    }
+    public interface CallBack {
+        void onItemSelected(Uri selectedUri);
     }
 }

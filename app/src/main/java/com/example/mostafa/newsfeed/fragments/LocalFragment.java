@@ -69,8 +69,8 @@ public class LocalFragment extends Fragment implements LoaderManager.LoaderCallb
         return new CursorLoader(getActivity()
                 , NewsContract.NewsEntry.CONTENT_URI
                 ,null
-                , NewsContract.NewsEntry.COLUMN_LOCAL+" = ?"
-                ,new String[]{String.valueOf(1)}, ""+NewsContract.NewsEntry._ID+" ASC");
+                , NewsContract.NewsEntry.COLUMN_LOCAL+" = ?"+" AND "+NewsContract.NewsEntry.COLUMN_FAV+" = ?"
+                ,new String[]{String.valueOf(1),String.valueOf(0)}, ""+NewsContract.NewsEntry._ID+" ASC");
     }
 
     @Override

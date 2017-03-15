@@ -11,4 +11,9 @@
     <string name="content_authority">com.example.mostafa.newsfeed.content.NewsContentProvider</string>
     <string name="sync_account_type">newsfeed.mostafa.example.com</string>
     <string name="addToFavorite">Add to favourites</string>
+    <string name="fav_added" >Added to favourites!</string>
+    <string name="fav_removed">Removed from favourites</string>
+    <string name="widget_listview_description">Widget Listview</string>
+    <string name="empty_list">Empty list</string>
+    <string name="empty_listview_description">offline mode - empty list</string>
 </resources>
