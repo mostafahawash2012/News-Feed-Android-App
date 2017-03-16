@@ -96,7 +96,7 @@ public class GlobalFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         //loader completes ,update the adapter with the data
-        Log.e(LOG_TAG," OnLoadFinished datasize = " + data.getCount());
+        Log.e(LOG_TAG," OnLoadFinishedd datasize = " + data.getCount());
         mRecyclerCursorAdapter.swap(data);
     }
 
