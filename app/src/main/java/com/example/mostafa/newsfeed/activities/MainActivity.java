@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.example.mostafa.newsfeed.MyApplication;
 import com.example.mostafa.newsfeed.R;
 import com.example.mostafa.newsfeed.adapters.RecyclerCursorAdapter;
 import com.example.mostafa.newsfeed.adapters.ViewPagerAdapter;
@@ -30,7 +31,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements RecyclerCursorAdapter.CallBack {
 
     private String LOG_TAG = MainActivity.class.getSimpleName();
-    private boolean tablet = false;
+    public static boolean tablet = false;
     private static Uri uri;
     private Toolbar mToolbar;
     private TabLayout mTabLayout;
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerCursorAda
         super.onCreate(savedInstanceState);
         Log.e(LOG_TAG,"OnCreate");
         setContentView(R.layout.activity_main);
-        if(findViewById(R.id.detailFragment_container)!=null){
+        if(findViewById(R.id.detailFragmentContainer)!=null){
             tablet=true;
             Log.e(LOG_TAG,"This is tablet");
         }
@@ -96,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerCursorAda
             Log.e(LOG_TAG, "Calling initializeSyncAdapter");
             NewsSyncAdapter.initializeSyncAdapter(this);
         }
+
+        // Make sure that Analytics tracking has started
+        ((MyApplication) getApplication()).startTracking();
     }
     private void setupViewPager(ViewPager viewPager){
 
@@ -131,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerCursorAda
                 detailFragment.setArguments(bundle);
 
                 getSupportFragmentManager().beginTransaction().//replace the container with the detailFregment
-                        replace(R.id.detailsFragmentContainer, detailFragment).commit();
+                        replace(R.id.detailFragmentContainer, detailFragment).commit();
             }
         }else{
             Log.e(LOG_TAG,"This is phone");

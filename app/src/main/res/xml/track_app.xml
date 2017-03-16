@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <resources>
+        <string name="ga_trackingId">UA-92630283-1</string>
+        <bool name="ga_autoActivityTracking">true</bool>    <!-- we can enable it programatically -->
+    <!-- configure screen names -->
+        <screenName name="com.example.mostafa.newsfeed.activities.MainActivity">
+            Main screen
+        </screenName>
+
+    </resources>

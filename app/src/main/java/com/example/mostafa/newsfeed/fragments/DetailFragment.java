@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mostafa.newsfeed.R;
+import com.example.mostafa.newsfeed.activities.MainActivity;
 import com.example.mostafa.newsfeed.content.NewsContract;
 import com.squareup.picasso.Picasso;
 
@@ -44,6 +46,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     ImageView mImageView;
     TextView mTitle,mSite,mDate,mText;
     String mUrl;
+    FloatingActionButton mFAB;
     Uri selectedUrl;
     Toolbar mToolbar;
     CollapsingToolbarLayout mCollapsingToolbarLayout;
@@ -78,7 +81,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
         mToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(!MainActivity.tablet);
        // mToolbar.inflateMenu(R.menu.detail);
 
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) rootView.findViewById(R.id.collapsing_toolbar);
@@ -87,6 +90,16 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         mSite = (TextView)rootView.findViewById(R.id.site_detail);
         mDate = (TextView)rootView.findViewById(R.id.date_detail);
         mText = (TextView)rootView.findViewById(R.id.content);
+        mFAB = (FloatingActionButton)rootView.findViewById(R.id.fab);
+        mFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT,mUrl);
+                intent.setType("text/plain");
+                startActivity(intent);
+            }
+        });
 
         mToast = Toast.makeText(getActivity(), null, Toast.LENGTH_SHORT);
 
