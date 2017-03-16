@@ -6,7 +6,7 @@ package com.example.mostafa.newsfeed.models;
 
 public class WebhoseAPI {
     //URL constans
-    public static final String BASE_URL="https://webhose.io/search";
+    public static final String BASE_URL="http://webhose.io/search";
     public static final String TOKEN_KEY = "token";
     public static final String API_KEY = "09efcf63-1c83-47f4-b1ff-62a433a5a999";
     public static final String FORMAT = "format";
