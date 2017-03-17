@@ -16,4 +16,11 @@
     <string name="widget_listview_description">Widget Listview</string>
     <string name="empty_list">Empty list</string>
     <string name="empty_listview_description">offline mode - empty list</string>
+    <string name="title_description">this is a news title</string>
+    <string name="date_description">this is a news date</string>
+    <string name="image_description">this is a news image</string>
+    <string name="site_description">this is news site</string>
+    <string name="content_description">this is news content</string>
+    <string name="share_description">this is share button</string>
+    <string name="settings_description">this is the settings</string>
 </resources>

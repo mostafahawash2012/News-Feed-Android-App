@@ -13,21 +13,24 @@
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:paddingEnd="10sp"
             android:textAllCaps="true"
-            android:textColor="#000000"
+            android:textColor="@color/widget_title_color"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            android:paddingRight="10sp" />
+            android:paddingRight="10sp"
+            android:paddingEnd="10sp"
+            android:contentDescription="@string/title_description"
+            />
 
         <TextView
             android:id="@+id/date_widget"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:textColor="#000000"
+            android:textColor="@color/widget_title_color"
             android:layout_height="wrap_content"
             android:paddingEnd="3dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:layout_gravity="center"
             android:paddingStart="3dp"
+            android:contentDescription="@string/date_description"
             />
     </LinearLayout>
